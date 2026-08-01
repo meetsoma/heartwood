@@ -64,6 +64,10 @@ closing is being performed rather than done.** It is the cheapest signal that th
 
 ## Full spec
 
-`spec/cycle-format.md` in the heartwood repo — the spine, the variants, and the measured evidence
-each section rests on. Read it when authoring a variant or changing the format; the doorway above is
-enough for routine use.
+The spec lives in the heartwood REPO, not in this installed payload — read it over the network:
+https://github.com/meetsoma/heartwood/blob/main/spec/cycle-format.md (the spine, the variants, and
+the measured evidence each section rests on). Read it when authoring a variant or changing the
+format; the doorway above is enough for routine use.
+
+<!-- SEAMS: (outside the payload — URL only, never a relative path; this file installs standalone)
+            ← https://github.com/meetsoma/heartwood/blob/main/spec/cycle-format.md -->

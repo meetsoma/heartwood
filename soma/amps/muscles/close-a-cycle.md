@@ -7,9 +7,11 @@ tags: [heartwood, cycles, closing, evidence, status]
 created: 2026-08-01
 updated: 2026-08-01
 ---
-<!-- SEAMS: ← ../../../spec/closing.md (the full reasoning this muscle mechanizes)
-            ← ../../../spec/cycle-format.md (the spine sections this sequence fills)
-            ← ../../skills/heartwood/SKILL.md §4 (points here for the mechanical version) -->
+<!-- SEAMS: (payload-relative — resolves inside soma/, works in any install)
+            ← ../../skills/heartwood/SKILL.md §4 (points here for the mechanical version)
+            (outside the payload — spec lives in the repo, NOT the install. URLs only, never relative.)
+            ← https://github.com/meetsoma/heartwood/blob/main/spec/closing.md (the full reasoning this muscle mechanizes)
+            ← https://github.com/meetsoma/heartwood/blob/main/spec/cycle-format.md (the spine sections this sequence fills) -->
 <!-- UPDATE WHEN: spec/closing.md's required sections or status vocabulary changes -->
 
 # Close a cycle
@@ -35,7 +37,8 @@ else replaced it — and link that something else.
 3. **`Bugs caught`** — if the cycle turned up any defects while shipping, list them. Don't leave
    this empty by default: an empty `Bugs caught` on one cycle is unremarkable, but an empty
    `Bugs caught` on *every* cycle in a project is the cheapest available sign that closing has
-   become a checkbox rather than a step (`spec/closing.md` §3).
+   become a checkbox rather than a step (full reasoning:
+   https://github.com/meetsoma/heartwood/blob/main/spec/closing.md , §3).
 
 4. **Evidence-bar pass** — re-read everything just written in steps 1-3. For each factual sentence,
    ask: does it name a command, a count, a commit, a URL someone could re-check? If a sentence
@@ -69,9 +72,14 @@ the record actively misleads the next reader. If you're not sure the Goal was me
 
 ## Related
 
-- `../../../spec/closing.md` — the full reasoning, the evidence-bar rule, and why `Bugs caught`
-  matters as a corpus-level signal, not a per-cycle one
-- `../../../spec/cycle-format.md` — the spine these three sections belong to, and the `status`
-  controlled vocabulary
 - `../../skills/heartwood/SKILL.md` — the full pick/scaffold/fill/close playbook this muscle is one
-  step of
+  step of (payload-relative)
+- https://github.com/meetsoma/heartwood/blob/main/spec/closing.md — the full reasoning, the
+  evidence-bar rule, and why `Bugs caught` matters as a corpus-level signal, not a per-cycle one
+- https://github.com/meetsoma/heartwood/blob/main/spec/cycle-format.md — the spine these three
+  sections belong to, and the `status` controlled vocabulary
+
+## Provenance
+
+Derived from heartwood spec v0.1.0, `spec/closing.md` §7 (the closing checklist) —
+https://github.com/meetsoma/heartwood .

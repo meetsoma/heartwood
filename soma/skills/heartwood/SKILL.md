@@ -9,20 +9,26 @@ description: |
 version: 1.0.0
 license: CC-BY-4.0
 origin: heartwood spec v0.1.0
-seeded-from: spec/README.md, spec/cycle-format.md, spec/closing.md
+seeded-from: "https://github.com/meetsoma/heartwood v0.1.0 — spec/README.md, spec/cycle-format.md, spec/closing.md (see Provenance below)"
 ---
-<!-- SEAMS: ← ../../../spec/README.md (the project/arc/cycle model)
-            ← ../../../spec/cycle-format.md (the spine + four variants)
-            ← ../../../spec/closing.md (what closed/parked/superseded require)
+<!-- SEAMS: (payload-relative — resolves inside soma/, works in any install)
             ← ../../body/heartwood.md (the doorway body file — read that first if it's loaded)
-            → ../../amps/muscles/close-a-cycle.md (the closing sequence this skill delegates to) -->
+            → ../../amps/muscles/close-a-cycle.md (the closing sequence this skill delegates to)
+            (outside the payload — spec lives in the repo, NOT the install. URLs only, never relative.)
+            ← https://github.com/meetsoma/heartwood/blob/main/spec/README.md (the project/arc/cycle model)
+            ← https://github.com/meetsoma/heartwood/blob/main/spec/cycle-format.md (the spine + four variants)
+            ← https://github.com/meetsoma/heartwood/blob/main/spec/closing.md (what closed/parked/superseded require) -->
 <!-- UPDATE WHEN: a new variant is added, the spine changes, or the closing rules change -->
 
 # Heartwood — pick, scaffold, fill, close
 
 You're opening or closing a piece of recorded work. This is the four-step playbook. It assumes the
-spec is already read once (`../../../spec/README.md`, `../../../spec/cycle-format.md`,
-`../../../spec/closing.md`) — this file is the procedure, not the reasoning behind it.
+spec's reasoning is already known — read it once at
+https://github.com/meetsoma/heartwood/blob/main/spec/README.md ,
+https://github.com/meetsoma/heartwood/blob/main/spec/cycle-format.md , and
+https://github.com/meetsoma/heartwood/blob/main/spec/closing.md if you can reach the network. If you
+can't, or if this is all you have (a bare `/hub install heartwood`), the four steps below are
+self-contained — this file is the procedure; the URLs are the *why*, not a dependency.
 
 ## 1. Pick the variant
 
@@ -47,27 +53,34 @@ Only if the work has a **through-line that will outlive any single cycle** — a
 related pieces of work belong together, not just one Goal. If so:
 
 1. Create `arc-slug/` (no number — the slug is the identity).
-2. Copy `../../../templates/arc/cycle.md` to `arc-slug/cycle.md` **first**, before any numbered
-   phase. Write "Why this arc exists" before scaffolding a single phase — an empty through-line is
-   the tell you started too early.
+2. Get `templates/arc/cycle.md` into `arc-slug/cycle.md` **first**, before any numbered phase (see
+   §2 — the templates live in the repo, not the payload, so how you get the file depends on what
+   you have access to). Write "Why this arc exists" before scaffolding a single phase — an empty
+   through-line is the tell you started too early.
 3. Then treat each phase as its own cycle: steps 2-4 below, inside `arc-slug/NNN-slug/`.
 
 ## 2. Scaffold
 
+The templates (`templates/cycle/`, `templates/arc/`, `templates/variants/*/`) are **not** part of
+this payload — they live at the repo root, alongside `spec/`. If you have the heartwood repo cloned,
+copy from disk; if all you have is this installed payload, fetch the raw file over the network:
+
 ```bash
-# standard cycle, no arc
-cp ../../../templates/cycle/cycle.md <path>/NNN-slug/cycle.md
+# repo cloned locally
+cp templates/cycle/cycle.md <path>/NNN-slug/cycle.md          # standard cycle, no arc
+cp templates/variants/<variant>/cycle.md <path>/NNN-slug/cycle.md   # a variant
+cp templates/arc/cycle.md <arc-slug>/cycle.md                  # an arc's own through-line file
 
-# a variant
-cp ../../../templates/variants/<variant>/cycle.md <path>/NNN-slug/cycle.md
-
-# an arc's own through-line file
-cp ../../../templates/arc/cycle.md <arc-slug>/cycle.md
+# payload-only install (no local clone) — same three, fetched by URL
+curl -o <path>/NNN-slug/cycle.md https://raw.githubusercontent.com/meetsoma/heartwood/main/templates/cycle/cycle.md
+curl -o <path>/NNN-slug/cycle.md https://raw.githubusercontent.com/meetsoma/heartwood/main/templates/variants/<variant>/cycle.md
+curl -o <arc-slug>/cycle.md https://raw.githubusercontent.com/meetsoma/heartwood/main/templates/arc/cycle.md
 ```
 
 `<path>` is the project's cycle root (or `arc-slug/` if this phase belongs to an arc). `NNN` is the
-next unused ordinal **in this arc or project** — per-tier, not global (spec/README.md §3). Never
-cite the number alone once you leave this directory; cite the full `project/arc-slug/NNN-slug` path.
+next unused ordinal **in this arc or project** — per-tier, not global (the model's numbering rule:
+https://github.com/meetsoma/heartwood/blob/main/spec/README.md , §3). Never cite the number alone
+once you leave this directory; cite the full `project/arc-slug/NNN-slug` path.
 
 Immediately: **quote the title.** `title: Mood: clinical preset` is invalid YAML that renders blank
 in every consumer instead of erroring — this defect went unnoticed for months in one real project.
@@ -87,8 +100,9 @@ earns its place — fill what's true, skip what isn't, don't pad.
 This is its own procedure — see `../../amps/muscles/close-a-cycle.md` for the mechanical sequence.
 The short version: `What shipped` (with commits) and `Decisions` (including the option you rejected)
 are required; every closed-half sentence must name **how** it was verified, not just assert that it
-was (`spec/closing.md` §2); and the final status is `closed` only if `Acceptance` was actually met —
-otherwise it's `parked` (stopped, may resume) or `superseded` (replaced — link the replacement).
+was (full reasoning: https://github.com/meetsoma/heartwood/blob/main/spec/closing.md , §2); and the
+final status is `closed` only if `Acceptance` was actually met — otherwise it's `parked` (stopped,
+may resume) or `superseded` (replaced — link the replacement).
 
 If this cycle lives inside an arc, closing it doesn't auto-update the arc's own phase-gate table —
 check whether `arc-slug/cycle.md` needs its gate flipped too.
@@ -103,3 +117,11 @@ check whether `arc-slug/cycle.md` needs its gate flipped too.
   estate is why bare-number citations are ambiguous outside their own directory.
 - An arc directory with numbered phases and no root `cycle.md` is incomplete — scaffold the arc's
   own through-line first, not last.
+
+## Provenance
+
+This playbook is derived from the heartwood spec v0.1.0 —
+https://github.com/meetsoma/heartwood — specifically `spec/README.md` (the project/arc/cycle
+model), `spec/cycle-format.md` (the spine, measured against 38 shipped cycles in a real project,
+not designed from taste), and `spec/closing.md` (what closing requires). This file is the
+agent-facing procedure; the spec is the reasoning it compresses.
