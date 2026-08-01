@@ -32,7 +32,12 @@ STATUSES = {"open", "active", "closed", "parked", "superseded"}
 TYPES = {"cycle", "arc"}
 
 FM_RE = re.compile(r"\A---\s*\n(.*?)\n---\s*(?:\n|\Z)", re.S)
-KEYVAL = re.compile(r"^([A-Za-z_][A-Za-z0-9_]*):\s*(.*)$")
+# Hyphens are REQUIRED in this class: real frontmatter uses `forked-from`,
+# `session-seeded`, `estimated-turns`. Without them check 4 silently skipped
+# every hyphenated key -- the file still failed check 1, but the actionable
+# "quote it" message never fired, which is check 4's whole reason to exist.
+# Found by fresh-eyes review, s01-593a6d; fixture 05 makes it falsifiable.
+KEYVAL = re.compile(r"^([A-Za-z_][A-Za-z0-9_-]*):\s*(.*)$")
 
 
 def find_cycles(root):

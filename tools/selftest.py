@@ -27,11 +27,16 @@ PY = sys.executable
 # (and only it — a fixture must fail on exactly the check it demonstrates).
 # 01 is a parse error that is NOT a colon-space error, so check 1 and check 4
 # stay independently falsifiable.
+# 05 asserts the ACTIONABLE message on a hyphenated key. It must assert
+# "quote it" and not merely a non-zero exit: before the fix this file already
+# failed check 1, so an exit-code-only assertion would have passed while
+# check 4 was dead for every hyphenated key in the wild. (s01-593a6d)
 EXPECT = {
     "01-unparseable-frontmatter": "YAML parse error",
     "02-wrong-type": "type:",
     "03-status-not-in-set": "status:",
     "04-unquoted-colon-space": "quote it",
+    "05-hyphenated-key-colon-space": "quote it",
 }
 
 
