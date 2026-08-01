@@ -22,6 +22,69 @@ Every change this job makes is **checkable by a command**. That is not a trust p
 job whose output can be falsified. **If you cannot run the gates, you are not doing this job: draft
 your proposed changes to a file and stop.**
 
+## Pass 0 — ASSEMBLY: does this folder even exist yet?
+
+Conforming assumes an arc. Often there isn't one — just flat cycles that belong together and nobody
+joined them. **Assembly is a separate job with its own gates, and it comes first.**
+
+### Find candidates by SHARED FILE REFERENCES, never by words
+
+Two cycles that both say "identity" may be unrelated. Two that both edit `auth.rs` are the same
+subject whatever they call it.
+
+```
+<registry> candidates          # connected components over the shared-ref graph
+<registry> overlap             # the underlying pairs
+```
+
+⚠ **Threshold 3 is correct; 2 blobs.** At 2 the components chain transitively — A-B share 2, B-C
+share 2, and A and C get merged although they share nothing. Measured: 6 clean groups at 3, a
+single **20-cycle blob** at 2. If you lower it, you are not finding more arcs, you are finding one
+fake one.
+
+### 🔴 Counting refs finds CANDIDATES. Only reading the goal finds MEMBERS.
+
+**This is the step that cannot be automated and the one most likely to be skipped.** Open every
+candidate's Goal and ask: *is this cycle ABOUT that subject, or does it merely TOUCH those files?*
+
+Measured on a real cluster: a version-bump cycle scored **7 shared delegation refs — higher than two
+genuine members** — because bumping a dependency touches the code without being about it. It was
+rejected on its goal, not its score. Another candidate matched heavily on words and shared **zero**
+file refs.
+
+### Then measure the cost before moving
+
+```
+grep -rl "cycles/<slug>" --include='*.md' . | grep -v 'sessions|preloads|_archive' | wc -l
+```
+
+- **< ~25 live refs → move now**, whatever the members' status. Cost is the constraint, not completeness.
+- **>= ~25 →** only when every member is complete, or declare the arc in frontmatter and move later.
+- **"assemble on completion" is a proxy for cost, never a principle.**
+
+### Move, rewrite, then verify the NEW paths
+
+1. `git mv` each member into `<arc>/`
+2. rewrite refs — and **beware your own guard**: a negative lookbehind written to stop
+   double-prefixing will also skip legitimate refs that already contain the arc name. One was missed
+   exactly this way.
+3. 🔴 **Resolve every NEW path. Never infer success from the old string being gone.** That check
+   caught a real miss and two false alarms in one session — including a *prose fragment* in an
+   archive that looked like a broken link. **Exclude archives at the FILE level, not by filtering the
+   extracted strings.**
+4. Write the arc `cycle.md`: Why this arc exists · Through-line · Members · Gates · **Rejected
+   membership, with the numbers** — recording what you rejected and why is what stops the next
+   person re-litigating it.
+
+### Members: named subjects or numbered phases?
+
+| shape | when |
+|---|---|
+| `01-`, `02-` **phases** | the sequence is REAL — 02 cannot start before 01 |
+| named **sub-arcs** | parallel attacks on one subject, each free to grow its own phases |
+
+**Numbering parallel work invents a dependency the corpus does not have, and people then honour it.**
+
 ## Run in TWO passes, and stop after the first
 
 **Pass 1 — MECHANICAL.** Frontmatter only. No body edits except adding facts the loss check demands.
@@ -56,6 +119,36 @@ deleting it destroys the reasoning mid-flight. Normalise its frontmatter and lea
 > **Compression is for narrative, never for evidence.** Keep verbatim: traps, commit hashes, measured
 > numbers, anything that settled an argument. **If unsure whether a line is narrative or evidence, it
 > is evidence — keep it.**
+
+## Tools — use them before hand-rolling a grep
+
+```
+<registry> validate <dir>        frontmatter parses + status in the enum
+<registry> candidates [N]        arc candidates (default N=3; do not lower to 2)
+<registry> overlap [N]           the underlying shared-ref pairs
+<registry> fix-status [tree]     DRY RUN. Safe renames only; scope it to your arc
+<registry> fix-status write      apply the safe renames
+<registry> drift                 frontmatter `updated:` vs git truth
+```
+
+🔑 **`fix-status` splits the work honestly, and the half it REFUSES is the point:**
+
+| | what it does |
+|---|---|
+| bare legacy word (`queued`, `done`, `in-progress`) | rewritten — unambiguous, no facts to lose |
+| **prose status** | **reported, never rewritten** |
+
+A prose status usually carries a fact that exists nowhere else — *"5 shipped"*, *"04d NOT started"*,
+*"WIRED but DISABLED"*. **Automatically shortening it to one word DELETES that fact.** So the tool
+hands prose back to you, and you do the loss check by hand. **That is not a missing feature.**
+
+⚠ **Always scope it** (`fix-status <tree>`). A corpus-wide write gives every file a fresh git date
+and blinds staleness detection for ~60 days — the sweep that has been ruled against twice.
+
+⚠ **And check your own probes.** In one session three separate greps returned confident nonsense:
+an exit code read through a pipe (that was `head`'s status), a `sed` range that restarted and printed
+two disjoint fragments as if adjacent, and an archive filter applied to strings instead of files.
+**A uniformly clean or uniformly extreme result is a broken probe, not a finding.**
 
 ## ⛔ The gates — run all four, paste the raw output
 
