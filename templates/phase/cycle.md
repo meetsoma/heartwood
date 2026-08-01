@@ -1,14 +1,14 @@
 ---
 type: cycle
 status: open
-status_note: ""
+status_note: ""            # session id
 title: "<phase title — QUOTE it if it contains a colon-space>"
 arc: <arc-slug>
 created: YYYY-MM-DD
 updated: YYYY-MM-DD
-depends_on: []
-description: ""
-tags: []
+depends_on: []             # the blocker, not "later"
+description: ""            # one sentence
+tags: []                   # lowercase filters
 ---
 
 <!-- A phase is a cycle that belongs to an arc. It uses the cycle enum and the cycle spine;

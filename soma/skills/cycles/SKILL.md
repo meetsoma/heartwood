@@ -94,9 +94,22 @@ deleting it destroys the reasoning mid-flight. Normalise its frontmatter and lea
 
 ## 0b. The frontmatter contract
 
-The templates ship these fields bare, with no explanatory comments — **the rules live here, once.**
-A comment inside a template is copied into every file scaffolded from it, so teaching in the template
-means teaching duplicated across the whole corpus and drifting from this page.
+**The rules live here, once.** The templates carry only a 2-3 word hint, and only on fields that ship
+empty — a prompt to fill, not documentation:
+
+```yaml
+status_note: ""            # session id
+description: ""            # one sentence
+tags: []                   # lowercase filters
+depends_on: []             # the blocker, not "later"
+```
+
+🔑 **Delete the hint when you write the value.** A hint beside an empty field is scaffolding; beside
+a filled one it is stale duplication that drifts from this page. **They are meant to disappear** —
+and once the shape is second nature across a few arcs, drop them from the templates too.
+
+Anything longer than a hint belongs here and nowhere else: a sentence inside a template is copied
+into every file scaffolded from it, which is the same duplication defect this protocol records.
 
 | field | rule |
 |---|---|

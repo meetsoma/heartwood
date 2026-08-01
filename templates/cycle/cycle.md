@@ -2,12 +2,12 @@
 type: cycle
 variant: standard
 status: open
-status_note: ""
+status_note: ""            # session id
 title: "<imperative phrase — QUOTE it, an unquoted colon breaks YAML>"
 created: YYYY-MM-DD
 updated: YYYY-MM-DD
-description: ""
-tags: []
+description: ""            # one sentence
+tags: []                   # lowercase filters
 ---
 
 # <title>

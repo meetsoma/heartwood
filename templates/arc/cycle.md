@@ -1,12 +1,12 @@
 ---
 type: arc
 status: open
-status_note: ""
+status_note: ""            # session id
 title: "<arc name — QUOTE it if it contains a colon-space>"
 created: YYYY-MM-DD
 updated: YYYY-MM-DD
-description: ""
-tags: []
+description: ""            # one sentence
+tags: []                   # lowercase filters
 ---
 
 # <arc name>

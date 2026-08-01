@@ -1,13 +1,13 @@
 ---
 type: closing-map
 status: closed
-status_note: ""
+status_note: ""            # session id
 title: "<arc-slug> — closing map"
 arc: <arc-slug>
 created: YYYY-MM-DD
 updated: YYYY-MM-DD
-description: ""
-tags: []
+description: ""            # one sentence
+tags: []                   # lowercase filters
 ---
 
 # <arc-slug> — closing map

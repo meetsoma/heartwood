@@ -2,12 +2,12 @@
 type: cycle
 variant: spike
 status: open
-status_note: ""
+status_note: ""            # session id
 title: "<quote it>"
 created: YYYY-MM-DD
 updated: YYYY-MM-DD
-description: ""
-tags: []
+description: ""            # one sentence
+tags: []                   # lowercase filters
 ---
 
 # <title>
