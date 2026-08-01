@@ -1,16 +1,14 @@
 ---
 type: cycle
 status: open
-status_note: ""            # AT MOST a session id (e.g. "s01-3ce947"). NOT a summary.
-                           # Detail belongs in the BODY (State / Still open / What shipped).
-                           # Prose here is the same defect as prose in `status`, one field over.
+status_note: ""
 title: "<phase title — QUOTE it if it contains a colon-space>"
-arc: <arc-slug>                # which arc owns this phase
+arc: <arc-slug>
 created: YYYY-MM-DD
 updated: YYYY-MM-DD
-depends_on: []                 # other phases or arcs — name the BLOCKER, never "later"
-description: ""            # one sentence, indexed by registries and dashboards
-tags: []                   # lowercase; how a reader FILTERS for this later
+depends_on: []
+description: ""
+tags: []
 ---
 
 <!-- A phase is a cycle that belongs to an arc. It uses the cycle enum and the cycle spine;

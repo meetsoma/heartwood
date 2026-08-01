@@ -92,6 +92,35 @@ Conforming an arc that predates this format is its own job, and it has one rule 
 **Condense only what is CLOSED or SHIPPED.** A live cycle's working narrative is doing its job —
 deleting it destroys the reasoning mid-flight. Normalise its frontmatter and leave the body alone.
 
+## 0b. The frontmatter contract
+
+The templates ship these fields bare, with no explanatory comments — **the rules live here, once.**
+A comment inside a template is copied into every file scaffolded from it, so teaching in the template
+means teaching duplicated across the whole corpus and drifting from this page.
+
+| field | rule |
+|---|---|
+| `type` | `cycle` or `arc` |
+| `status` | **ONE word** from `open · active · closed · shipped · parked · superseded` |
+| `status_note` | **a session id and nothing else** (`"s01-3ce947"`). For a terminal cycle, the session that closed it |
+| `title` | quoted — an unquoted colon breaks YAML |
+| `arc` | the arc slug, if it belongs to one |
+| `created` / `updated` | dates; `closed:` only when terminal |
+| `depends_on` | name the **blocker**, never "later" |
+| `description` | one sentence — registries and dashboards index this |
+| `tags` | lowercase; how a reader **filters** for this later |
+
+🔴 **`status_note` is not a summary.** Detail belongs in the BODY — `State`, `Still open`,
+`What shipped`. **Prose in `status_note` is the same defect as prose in `status`, one field over.**
+
+Measured on a real corpus: 26% of cycles carried a `status` longer than 25 characters, and the first
+attempt to fix it simply moved the prose sideways — notes reached 293 characters. The field is a
+machine state and a pointer; nothing else.
+
+**Why one word matters:** a registry buckets on `status`. Free prose means a cycle reading
+`active — phase 2 shipped` gets classified **Closed** because a substring matched, and no output ever
+says so.
+
 ## 1. Pick the variant
 
 Before scaffolding anything, decide what kind of work this is. Getting this wrong is the single
