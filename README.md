@@ -60,15 +60,15 @@ Two rules that carry most of the value:
 | path | for |
 |---|---|
 | `spec/` | the protocol — human-readable, no tooling required |
-| `templates/` | copyable scaffolds: `cycle/`, `arc/`, and the four `variants/` |
-| `tools/` | cross-tree scanner + validator |
+| `templates/` | copyable scaffolds: `cycle/` (the `standard` variant), `arc/`, and three `variants/` |
+| `tools/` | `validate.py` — the four spec'd checks, single-tree · `selftest.py` · broken fixtures · `pre-commit` |
 | `soma/` | payload that installs into a [Soma](https://github.com/meetsoma/soma-beta) agent's `.soma/` |
 
 ## Status
 
-**Draft, v0.1.** The spec is written from measured usage across three projects; the tooling is
-partially extracted and the payload is scaffolded, not finished. See `spec/` for what is settled and
-what is not.
+**Draft, v0.1.** The spec is written from measured usage across three projects; the payload is
+scaffolded, not finished. The validator is extracted and gates this repo's own demo via
+`tools/pre-commit`. See `spec/` for what is settled and what is not.
 
 ## Related
 
