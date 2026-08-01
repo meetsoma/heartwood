@@ -144,6 +144,34 @@ status_note: "auto-flipped s01-17d700 — report.md confirms completion"
 A status of `shipped (auto-flipped s01-17d700 — report confirms)` is three fields in a trench coat,
 and it makes the corpus unfilterable.
 
+### Why `closed` and not `shipped`
+
+**`closed` describes the record. `shipped` would describe the work.** They are different claims, and
+heartwood specifies the record.
+
+Only one of the four variants actually ships. An `audit` produces findings and merges nothing. A
+`spike` is often discarded on purpose — that is a successful spike. A `branching` cycle converges on
+a decision. Labelling those `shipped` asserts a merge that never happened; `closed` is true for all
+four.
+
+This is the same seam the rest of the spec runs on: heartwood specifies the ARTIFACT, a workflow
+protocol specifies the PROCESS.
+
+**Interop with PHASE.** [PHASE](https://github.com/curtismercier/protocols) uses
+`queued | active | shipped | parked | superseded` for its phase folders — the same five-state shape,
+tracking the work rather than the record. Hosts running both map:
+
+| heartwood (the record) | PHASE (the work) |
+|---|---|
+| `open` | `queued` |
+| `active` | `active` |
+| `closed` | `shipped` |
+| `parked` | `parked` |
+| `superseded` | `superseded` |
+
+The two middle-and-outer values coincide; only the endpoints differ, and they differ because they
+describe different subjects. Neither is a fork of the other.
+
 ---
 
 ## Gap analysis against a live 221-cycle corpus (s01-8b4389)
