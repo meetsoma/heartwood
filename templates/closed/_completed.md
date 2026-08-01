@@ -1,8 +1,9 @@
 ---
 type: closing-map
 status: closed
-status_note: ""            # free prose: WHERE it stands, blockers, partials.
-                           # `status` is a machine state; everything else lives here.
+status_note: ""            # AT MOST a session id (e.g. "s01-3ce947"). NOT a summary.
+                           # Detail belongs in the BODY (State / Still open / What shipped).
+                           # Prose here is the same defect as prose in `status`, one field over.
 title: "<arc-slug> — closing map"
 arc: <arc-slug>
 created: YYYY-MM-DD
