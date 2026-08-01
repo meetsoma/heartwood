@@ -53,8 +53,8 @@ record reflects real work.
 ### Why `Decisions` outranks everything
 
 It is the most-used section (16 of 38) because it is the only one that survives contact with the
-future. `What shipped` is recoverable from git. `Decisions` \u2014 particularly **the option you
-rejected and why** \u2014 exists nowhere else, and is precisely what the next person needs in order not
+future. `What shipped` is recoverable from git. `Decisions` — particularly **the option you
+rejected and why** — exists nowhere else, and is precisely what the next person needs in order not
 to relitigate it.
 
 **Record the rejected option.** A decision without its alternative is a preference.
@@ -64,12 +64,21 @@ to relitigate it.
 Not all work is shipping work. A variant declares itself in frontmatter (`variant: branching`) and
 adds sections to the spine; it never removes `Goal`.
 
-| variant | when | adds |
-|---|---|---|
-| **standard** | build and ship a thing | (the spine) |
-| **branching** | two or more rival approaches in parallel | `Branches` \u00b7 `Convergence criteria` \u00b7 `Verdict` |
-| **audit** | measure something that already exists | `Denominator` \u00b7 `Method` \u00b7 `Findings` \u00b7 `What I could not measure` |
-| **spike** | learn something; may be thrown away | `Question` \u00b7 `Timebox` \u00b7 `Answer` \u00b7 `Keep or discard` |
+| variant | maturity | when | adds |
+|---|---|---|---|
+| **standard** | **stable** — 38 real instances | build and ship a thing | (the spine) |
+| **branching** | ⚠ **speculative** — 1 instance, spec does NOT match it | two or more rival approaches in parallel | `Branches` · `Convergence criteria` · `Verdict` |
+| **audit** | ⚠ **speculative** — **zero** instances | measure something that already exists | `Denominator` · `Method` · `Findings` · `What I could not measure` |
+| **spike** | ⚠ **speculative** — zero instances | learn something; may be thrown away | `Question` · `Timebox` · `Answer` · `Keep or discard` |
+
+> 🔴 **Only `standard` is evidenced.** A corpus review across three real trees (s01-8b4389) found
+> exactly one branching cycle in the wild, and **none of the three sections specced here match what
+> it wrote** — the shape was invented around a single case. `audit` and `spike` have zero instances.
+>
+> They are kept because the distinctions are argued below and cost nothing to ignore, but **do not
+> treat them as validated.** Presenting four equal variants when three are untested is exactly the
+> confident-and-wrong rendering this format warns about. Promote a variant when real cycles use it,
+> not when the reasoning sounds good.
 
 ### branching
 
@@ -157,7 +166,7 @@ session: s01-8b4389        # optional, but expected wherever an agent authored t
 ```
 
 **2. Rendering is an OPTIONAL projection.** A conforming `cycle.md` is renderable by any
-PRISM-conformant viewer with no changes \u2014 frontmatter plus `##` headings is enough. Adding
+PRISM-conformant viewer with no changes — frontmatter plus `##` headings is enough. Adding
 `<!-- @section: name -->` anchors is optional and unlocks *surgical editing* (rewrite one section
 without touching the file). **Neither is required.** Stating this costs nothing and prevents hosts
 inventing incompatible render conventions.
@@ -173,20 +182,20 @@ inventing incompatible render conventions.
 
 A validator that warns instead of failing is a validator nobody runs.
 
-### DECLINE \u2014 two deliberate exclusions
+### DECLINE — two deliberate exclusions
 
 **`spans_repos` / `depends_on` / `parent_cycle`** are real and used (34/35/29%), but they exist
 because that corpus spans 18 repos. Speccing them would imply heartwood requires an estate.
 **Hosts may add fields**; these are documented as a known extension, not part of the core.
 
-**The process loop** (ground \u2192 decide \u2192 plan \u2192 build \u2192 verify \u2192 consolidate \u2192 reflect) belongs to a
+**The process loop** (ground → decide → plan → build → verify → consolidate → reflect) belongs to a
 workflow protocol, not here. **Heartwood specifies the ARTIFACT; a workflow protocol specifies the
 PROCESS.** Merging them turns a format into a methodology, and methodologies get ignored where
 formats get adopted.
 
 ### One honest note
 
-In that corpus `updated` appears on only **19%** of cycles \u2014 while the spec above requires it. The
+In that corpus `updated` appears on only **19%** of cycles — while the spec above requires it. The
 spec is ahead of the practice there, not behind it, and that gap is the direct cause of frontmatter
 dates disagreeing with git history at scale.
 
