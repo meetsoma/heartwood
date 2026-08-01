@@ -2,9 +2,13 @@
 type: cycle
 variant: branching
 status: open
+status_note: ""            # free prose: WHERE it stands, blockers, partials.
+                           # `status` is a machine state; everything else lives here.
 title: "<quote it>"
 created: YYYY-MM-DD
 updated: YYYY-MM-DD
+description: ""            # one sentence, indexed by registries and dashboards
+tags: []                   # lowercase; how a reader FILTERS for this later
 ---
 
 # <title>

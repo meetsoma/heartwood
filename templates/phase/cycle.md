@@ -1,11 +1,15 @@
 ---
 type: cycle
 status: open
+status_note: ""            # free prose: WHERE it stands, blockers, partials.
+                           # `status` is a machine state; everything else lives here.
 title: "<phase title — QUOTE it if it contains a colon-space>"
 arc: <arc-slug>                # which arc owns this phase
 created: YYYY-MM-DD
 updated: YYYY-MM-DD
 depends_on: []                 # other phases or arcs — name the BLOCKER, never "later"
+description: ""            # one sentence, indexed by registries and dashboards
+tags: []                   # lowercase; how a reader FILTERS for this later
 ---
 
 <!-- A phase is a cycle that belongs to an arc. It uses the cycle enum and the cycle spine;

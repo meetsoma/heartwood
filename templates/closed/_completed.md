@@ -1,10 +1,14 @@
 ---
 type: closing-map
 status: closed
+status_note: ""            # free prose: WHERE it stands, blockers, partials.
+                           # `status` is a machine state; everything else lives here.
 title: "<arc-slug> — closing map"
 arc: <arc-slug>
 created: YYYY-MM-DD
 updated: YYYY-MM-DD
+description: ""            # one sentence, indexed by registries and dashboards
+tags: []                   # lowercase; how a reader FILTERS for this later
 ---
 
 # <arc-slug> — closing map

@@ -1,9 +1,13 @@
 ---
 type: arc
 status: open
+status_note: ""            # free prose: WHERE it stands, blockers, partials.
+                           # `status` is a machine state; everything else lives here.
 title: "<arc name — QUOTE it if it contains a colon-space>"
 created: YYYY-MM-DD
 updated: YYYY-MM-DD
+description: ""            # one sentence, indexed by registries and dashboards
+tags: []                   # lowercase; how a reader FILTERS for this later
 ---
 
 # <arc name>

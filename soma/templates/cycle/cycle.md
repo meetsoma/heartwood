@@ -2,9 +2,13 @@
 type: cycle
 variant: standard
 status: open
+status_note: ""            # free prose: WHERE it stands, blockers, partials.
+                           # `status` is a machine state; everything else lives here.
 title: "<imperative phrase — QUOTE it, an unquoted colon breaks YAML>"
 created: YYYY-MM-DD
 updated: YYYY-MM-DD
+description: ""            # one sentence, indexed by registries and dashboards
+tags: []                   # lowercase; how a reader FILTERS for this later
 ---
 
 # <title>
