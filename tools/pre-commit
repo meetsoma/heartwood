@@ -1,0 +1,20 @@
+#!/bin/sh
+# heartwood pre-commit — gate the repo's own demo on the validator.
+# A commit that ships a non-conforming cycle.md is a format regression;
+# a hook that warns instead of failing is a hook nobody runs.
+#
+# Install:  ln -s ../../tools/pre-commit .git/hooks/pre-commit
+#           (or: cp tools/pre-commit .git/hooks/pre-commit && chmod +x)
+#
+# tools/_fixtures/ is skipped by the validator on purpose (deliberately
+# broken documents exist to prove it can fail) — they never block a commit.
+
+ROOT="$(git rev-parse --show-toplevel)" || exit 1
+cd "$ROOT" || exit 1
+
+if ! python3 tools/validate.py >/dev/null 2>&1; then
+    echo "pre-commit: heartwood validate FAILED — non-conforming cycle.md in the tree."
+    echo "Run:  python3 tools/validate.py   (shows each problem)"
+    exit 1
+fi
+exit 0
