@@ -171,17 +171,26 @@ protocol specifies the PROCESS.
 `queued | active | shipped | parked | superseded` for its phase folders — the same five-state shape,
 tracking the work rather than the record. Hosts running both map:
 
-| heartwood (the record) | PHASE (the work) |
-|---|---|
-| `open` | `queued` |
-| `active` | `active` |
-| `closed` | `shipped` |
-| `parked` | `parked` |
-| `superseded` | `superseded` |
+| heartwood (the record) | PHASE (the work) | |
+|---|---|---|
+| `open` | `queued` | the only true divergence — different word, same state |
+| `active` | `active` | |
+| `shipped` | `shipped` | identical meaning in both |
+| `closed` | `shipped` | ⚠ **lossy** — PHASE has no word for *finished, never released* |
+| `parked` | `parked` | |
+| `superseded` | `superseded` | |
 
-With `shipped` adopted, heartwood is now a SUPERSET of PHASE's terminal vocabulary — `shipped` means
-the same thing in both, and `closed` adds the case PHASE has no word for (finished, never released).
-`open`↔`queued` remains the only true divergence. Neither is a fork of the other.
+With `shipped` adopted, heartwood is a SUPERSET of PHASE's terminal vocabulary. **The mapping is
+lossy in exactly one direction:** heartwood → PHASE collapses `closed` and `shipped` onto
+`shipped`, so a round-trip through PHASE cannot recover the distinction. That is a property of
+PHASE's vocabulary, not a defect in either — but a host that round-trips must keep `status_note`
+or it will silently promote an audit into a release. Neither is a fork of the other.
+
+<!-- CORRECTED s01-d1fa77: this table still had FIVE rows after 83cad3f added a sixth state, and
+     mapped heartwood `closed` -> PHASE `shipped` with no row for heartwood's own `shipped` — so
+     the spec's own interop table contradicted the enum three sections above it. Found by
+     re-deriving the row count against the enum rather than reading the table. The prose already
+     said "superset"; the table hadn't caught up. -->
 
 ---
 
