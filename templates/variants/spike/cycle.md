@@ -31,3 +31,7 @@ updated: YYYY-MM-DD
 ## Decisions
 
 <including the option you rejected>
+
+## What shipped
+
+<what actually landed, with commits. Required to close, in every variant.>
