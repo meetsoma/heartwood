@@ -33,6 +33,65 @@ https://github.com/meetsoma/heartwood/blob/main/spec/closing.md if you can reach
 can't, or if this is all you have (a bare `/hub install heartwood`), the four steps below are
 self-contained — this file is the procedure; the URLs are the *why*, not a dependency.
 
+## 0. Decide what you are holding
+
+Most mistakes here are made before any file is written, by scaffolding the wrong shape. Start here.
+
+```
+What do you have?
+│
+├─ an IDEA, no acceptance yet
+│     → not a cycle. Write it where ideas live. A cycle with no stopping
+│       condition can never close — it can only be abandoned.
+│
+├─ ONE piece of work
+│     → templates/cycle/  (or a variant — §1)
+│
+├─ ONE piece of work that belongs to a larger body
+│     → templates/phase/ inside <arc-slug>/NNN-slug/
+│
+├─ TWO OR MORE cycles on the same SUBJECT
+│     → an arc. templates/arc/ + a phase per part.
+│       ⚠ Same subject, NOT same kind. "audit" is how work was done;
+│         nobody browses by it. Group by what it is ABOUT.
+│
+└─ work that is finished
+      → §4. If it is an arc: templates/closed/_completed.md
+```
+
+### Do these loose cycles belong together?
+
+**Detect by SHARED FILE REFERENCES, not shared words** — two cycles editing the same code are the
+same subject regardless of vocabulary, and fuzzy text matching misses exactly that. If your host has
+a registry, ask it (`soma-cycles-registry.py overlap`); otherwise grep the `Files` sections.
+
+Then decide by **measured cost, never by feel**:
+
+```
+>=2 cycles on one subject?
+├─ no  → leave it. A singleton is not an arc.
+└─ yes → count LIVE refs to their paths (exclude sessions, preloads, archives)
+         ├─ < ~25   → ASSEMBLE NOW, whatever their status. Cost is the constraint.
+         ├─ >= ~25  → every phase complete?  yes → assemble (refs stopped growing)
+         │                                    no  → declare the arc in frontmatter, assemble later
+         └─ spans PROJECTS? → symlink the foreign member in. NEVER move another
+                              project's cycle — it breaks that project's record.
+```
+
+🔑 **"Assemble on completion" is a proxy for cost, never a principle.** When cost is measured and
+low, completeness is irrelevant. Measured once: 16 refs vs 192 — two orders of magnitude separate
+the arcs that move from the one that waits, and it is one command to find out.
+
+### Bringing an existing folder up to standard
+
+Conforming an arc that predates this format is its own job, and it has one rule that is easy to skip:
+
+> **Every fact you delete from a `status:` string must already exist in the body.** Check it as a
+> diff, not by eye. A fact with no body home is not compression, it is deletion.
+
+**Condense only what is CLOSED or SHIPPED.** A live cycle's working narrative is doing its job —
+deleting it destroys the reasoning mid-flight. Normalise its frontmatter and leave the body alone.
+
 ## 1. Pick the variant
 
 Before scaffolding anything, decide what kind of work this is. Getting this wrong is the single
