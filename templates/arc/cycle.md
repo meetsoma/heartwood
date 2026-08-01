@@ -39,22 +39,28 @@ never by number** — a bare number identifies nothing once a second arc exists.
 > **Every gate must be falsifiable.** Ask *"what input would make this report failure?"* No answer
 > means you wrote a decoration, not a gate.
 
-## Members from other projects
+## Members from elsewhere
 
-| project | what | why it's here |
+| member | where it lives | why it's here |
 |---|---|---|
-| `<project>@` | symlinked cycles | an arc spans projects **by symlink** — never by moving another project's cycle |
+| `<slug>/` | moved in | related work, consolidated — one folder, one place to read |
+| `<slug>` | left in place, `arc: <this-arc>` in its frontmatter | too many inbound refs to move cheaply, or a foreign estate |
 
-*(Delete if none. `cycles/<arc>/<project>@ -> ../../<project>/.soma/cycles`)*
+*(Delete if none.)*
 
-> Moving a cycle out of its owning project breaks that project's record. A symlink lets an arc claim
-> membership without taking custody.
+> **Prefer MOVING. Membership is a frontmatter fact, not a filesystem fact.**
 >
-> ⚠ **Only symlink if your tooling cannot see across trees.** If your registry already discovers every
-> tree, a symlink buys nothing and costs two things: a census that double-counts (anything following
-> links counts the target twice), and a duplicated group in any dashboard. One estate measured a
-> **113-cycle (21%) inflation** from three of them and removed all three once its indexer was
-> tree-aware. Delete this section if you have no foreign members.
+> An arc claims a cycle with `arc: <slug>` in that cycle's frontmatter — the registry groups on it
+> wherever the file sits. So the folder is for **humans**, and the only question a move has to answer
+> is *what does it cost in referrer updates?* Measure inbound refs; under ~25, move it and fix the
+> referrers; over that, leave it and declare `arc:`.
+>
+> ⛔ **Don't reach for a symlink.** It looks like consolidation and isn't: it gives a reader two
+> places one cycle might be, while giving the indexer nothing it couldn't already discover by
+> walking trees. One estate measured a **113-cycle (21%) inflation** from three of them, removed all
+> three, and lost nothing. **The one exception** is a foreign estate whose record you must not take
+> custody of (a client's tree, a repo you don't own) — then link it and **write the reason in this
+> table**, because an unexplained link gets deleted.
 
 ## State
 

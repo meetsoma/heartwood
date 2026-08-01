@@ -74,9 +74,16 @@ Then decide by **measured cost, never by feel**:
          ├─ < ~25   → ASSEMBLE NOW, whatever their status. Cost is the constraint.
          ├─ >= ~25  → every phase complete?  yes → assemble (refs stopped growing)
          │                                    no  → declare the arc in frontmatter, assemble later
-         └─ spans PROJECTS? → symlink the foreign member in. NEVER move another
-                              project's cycle — it breaks that project's record.
+         └─ spans PROJECTS/TREES? → same rule. The boundary is not the gate; the
+                              ref-count is. If it's ours, MOVE it. Only a foreign
+                              estate you must not take custody of stays put — then
+                              declare `arc:` in its frontmatter and say why.
 ```
+
+⛔ **Never symlink a cycle to "assemble" it.** Membership is `arc: <slug>` in frontmatter; the
+registry groups on that wherever the file sits. A link gives a reader two places one cycle might be
+and gives the indexer nothing — one estate measured **113 cycles (21%) of inflation** from three
+links and deleted all three with no loss.
 
 🔑 **"Assemble on completion" is a proxy for cost, never a principle.** When cost is measured and
 low, completeness is irrelevant. Measured once: 16 refs vs 192 — two orders of magnitude separate

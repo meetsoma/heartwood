@@ -108,21 +108,34 @@ not by a subdirectory:
 ^^^^^^^^^                                            <- the project IS the path
 ```
 
-A parent tree may pull sibling projects in **by symlink**, named for the project:
+**A cycle is owned by the project it is ABOUT**, so it resolves from that project's own directory.
+A parent that wants to see everything at once does **not** need to restructure the filesystem: an
+indexer that *discovers* trees resolves a live estate of **12 distinct projects** with no links at
+all.
 
-```
-meetsoma/.soma/cycles/
-├── _meta/                 <- a local arc
-├── audit-improve/         <- a local arc
-├── somaverse   -> ../../somaverse/.soma/cycles      <- another project, by reference
-├── services    -> ../../services/.soma/cycles
-└── bonsai      -> ../../racecar/lab/.../.soma/cycles
+### An arc claims a cycle in FRONTMATTER, not on the filesystem
+
+```yaml
+arc: <arc-slug>     # in the cycle's own frontmatter, wherever the file sits
 ```
 
-**A cycle is owned by the project it is ABOUT**, so it resolves from that project's own directory
-and the parent merely references it. Never copy a cycle into a parent tree — a symlink keeps one
-source of truth and lets both trees index it. A live estate resolves **12 distinct projects** this
-way.
+That is the membership mechanism. The folder is a convenience for **humans reading**, so
+consolidating related cycles into one arc folder is a *move*, priced in referrer updates — measure
+inbound references, and if they are cheap, move; if not, leave the file and declare `arc:`.
+
+⛔ **Do not link cycles between trees.** It reads as consolidation and is not: a link hands a human
+two places one cycle might live, while handing the indexer nothing it could not already discover.
+Anything that follows links counts the target twice — one estate measured **113 cycles of inflation
+(21%)** from three links, deleted all three, and lost nothing.
+
+**The one exception:** a foreign estate whose record you must not take custody of — a client's tree,
+a repo you don't own. Then link it *and record why in the arc's Members table*, because an
+unexplained link will eventually be deleted by someone tidying.
+
+<!-- CORRECTED 2026-08-01: this section prescribed pulling sibling projects in by symlink and showed
+     `somaverse -> ../../somaverse/.soma/cycles` as the pattern. Those exact three links had already
+     been retired in the estate the example came from. Fossil kept: an agent read the instruction,
+     followed it, and had to be reversed by hand. -->
 
 ## Multi-agent hosts
 
