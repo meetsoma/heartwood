@@ -94,3 +94,34 @@ not compression, it is deletion.**
 2. All four gate outputs, raw
 3. **Every fact you relocated, and where it landed**
 4. Anything the templates or the spec should absorb — that feedback is wanted, not noise
+
+## ⛔ Before you finish — write your own MLRX notes
+
+Append what you learned to **`## MLRX notes`** in THIS file. Do **not** write to
+`## Accumulated Knowledge` — that section is injected into every future spawn, and only the parent
+promotes into it. The split is what lets raw notes accumulate at zero prompt cost.
+
+```markdown
+### <YYYY-MM-DD> <session-id>
+- **<the reusable rule>** — <the evidence, in one clause>
+- reflex gap: <what you did slowly, and the faster way>
+```
+
+Write the **rule, not the incident.** "Spent 4 calls on X" is a diary entry; "check whether the
+system already did it before assuming it broke" is usable next run.
+
+If nothing generalised, write `- (nothing that generalises)`. **An honest empty run beats an invented
+lesson** — the parent prunes this section and noise costs them the read.
+
+## MLRX notes
+
+_Raw, unpromoted. The parent reads this before delegating and either promotes a line into
+`## Accumulated Knowledge` or deletes it. Not injected into any prompt._
+
+### seed — from the reference pass this role was derived from
+- **Prose beats the table when they disagree.** A status string and a summary table describing the
+  same thing drift; the prose is the newer fact. Give the fact a body home rather than editing the
+  table into agreement.
+- **Check "the system already did it" before "the system is broken."** An auto-committing `.soma`
+  will have already committed your edit.
+- **Scope discipline is not scope paralysis** — gate the *edits* outside your arc, never the *reads*.
