@@ -78,6 +78,35 @@ def main():
     finally:
         shutil.rmtree(tmp, ignore_errors=True)
 
+    # ── payload/template parity ──────────────────────────────────────────────
+    # `templates/` is the spec-facing home (cited 8x by spec/README.md and
+    # README.md); `soma/templates/` is the distributed copy that installs into a
+    # project. Two copies of the same content in one repo is the exact drift this
+    # protocol exists to record, so it is only acceptable with a gate asserting
+    # they are identical. Without this, a template fix lands in one and ships from
+    # the other.
+    import filecmp
+    repo = os.path.dirname(os.path.dirname(HERE))
+    root_t = os.path.join(repo, "templates")
+    pay_t = os.path.join(repo, "soma", "templates")
+    if os.path.isdir(root_t) and os.path.isdir(pay_t):
+        rel = lambda base: {os.path.relpath(os.path.join(dp, f), base)
+                            for dp, _d, fs in os.walk(base) for f in fs
+                            if not f.startswith(".")}
+        a, b = rel(root_t), rel(pay_t)
+        missing = sorted((a - b) | (b - a))
+        differing = sorted(f for f in (a & b)
+                           if not filecmp.cmp(os.path.join(root_t, f),
+                                              os.path.join(pay_t, f), shallow=False))
+        case("templates/ and soma/templates/ hold the same files",
+             not missing, "symmetric difference: %s" % (missing or "none"), "")
+        case("templates/ and soma/templates/ are byte-identical",
+             not differing, "differing: %s" % (differing or "none"), "")
+    else:
+        case("templates/ and soma/templates/ both exist", False,
+             "one of them is missing", "root=%s payload=%s"
+             % (os.path.isdir(root_t), os.path.isdir(pay_t)))
+
     print("self-test: %d cases" % len(results))
     failed = 0
     for name, ok, why, out in results:

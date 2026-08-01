@@ -35,11 +35,10 @@ denominator.
 | `audit` | measure something that exists — denominator mandatory |
 | `spike` | learn; may be discarded — timebox written at the start |
 
-Scaffold from `templates/cycle/` or `templates/variants/<variant>/`. ⚠ **The templates are not part
-of this payload** — they live at the heartwood repo root. If you have it cloned, copy from disk;
-otherwise fetch the raw file from
-<https://github.com/meetsoma/heartwood/tree/main/templates>. The skill has the exact command:
-`../skills/heartwood/SKILL.md` §2.
+Scaffold from `../templates/cycle/` or `../templates/variants/<variant>/` — **the templates install
+with this payload**, so it is a local copy, no network. An arc also takes `../templates/arc/` for its
+through-line file and `../templates/phase/` for each ordered part; closing an arc takes
+`../templates/closed/`. Exact commands and a pick-by-shape table: `../skills/heartwood/SKILL.md` §2.
 
 ## The two rules that carry most of the value
 

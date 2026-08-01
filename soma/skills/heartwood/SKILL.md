@@ -53,29 +53,35 @@ Only if the work has a **through-line that will outlive any single cycle** — a
 related pieces of work belong together, not just one Goal. If so:
 
 1. Create `arc-slug/` (no number — the slug is the identity).
-2. Get `templates/arc/cycle.md` into `arc-slug/cycle.md` **first**, before any numbered phase (see
-   §2 — the templates live in the repo, not the payload, so how you get the file depends on what
-   you have access to). Write "Why this arc exists" before scaffolding a single phase — an empty
-   through-line is the tell you started too early.
+2. Get `../../templates/arc/cycle.md` into `arc-slug/cycle.md` **first**, before any numbered phase.
+   Write "Why this arc exists" before scaffolding a single phase — an empty through-line is the tell
+   you started too early.
 3. Then treat each phase as its own cycle: steps 2-4 below, inside `arc-slug/NNN-slug/`.
 
 ## 2. Scaffold
 
-The templates (`templates/cycle/`, `templates/arc/`, `templates/variants/*/`) are **not** part of
-this payload — they live at the repo root, alongside `spec/`. If you have the heartwood repo cloned,
-copy from disk; if all you have is this installed payload, fetch the raw file over the network:
+**The templates install with this payload** — they sit beside this skill at `templates/`, so
+scaffolding is a local copy with no network and no clone required.
 
 ```bash
-# repo cloned locally
-cp templates/cycle/cycle.md <path>/NNN-slug/cycle.md          # standard cycle, no arc
-cp templates/variants/<variant>/cycle.md <path>/NNN-slug/cycle.md   # a variant
-cp templates/arc/cycle.md <arc-slug>/cycle.md                  # an arc's own through-line file
-
-# payload-only install (no local clone) — same three, fetched by URL
-curl -o <path>/NNN-slug/cycle.md https://raw.githubusercontent.com/meetsoma/heartwood/main/templates/cycle/cycle.md
-curl -o <path>/NNN-slug/cycle.md https://raw.githubusercontent.com/meetsoma/heartwood/main/templates/variants/<variant>/cycle.md
-curl -o <arc-slug>/cycle.md https://raw.githubusercontent.com/meetsoma/heartwood/main/templates/arc/cycle.md
+# paths are relative to the installed payload root (e.g. .soma/)
+cp templates/cycle/cycle.md   <path>/NNN-slug/cycle.md              # standard cycle, no arc
+cp templates/variants/<variant>/cycle.md <path>/NNN-slug/cycle.md   # audit | branching | spike
+cp templates/arc/cycle.md     <arc-slug>/cycle.md                   # an arc's through-line file
+cp templates/phase/cycle.md   <arc-slug>/NNN-slug/cycle.md          # a cycle that belongs to an arc
+cp templates/closed/_completed.md <arc-slug>/_completed.md          # the arc's closing map
 ```
+
+**Pick by shape, not by habit:**
+
+| you are starting | use |
+|---|---|
+| one piece of work, no arc | `templates/cycle/` |
+| a body of work with ordered parts | `templates/arc/`, then `templates/phase/` per part |
+| measuring something that exists | `templates/variants/audit/` — denominator mandatory |
+| rival approaches in parallel | `templates/variants/branching/` — criteria BEFORE the branches |
+| learning, may be discarded | `templates/variants/spike/` — timebox at the start |
+| closing an arc | `templates/closed/` — see §closing |
 
 `<path>` is the project's cycle root (or `arc-slug/` if this phase belongs to an arc). `NNN` is the
 next unused ordinal **in this arc or project** — per-tier, not global (the model's numbering rule:
