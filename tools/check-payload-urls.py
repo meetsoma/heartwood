@@ -27,6 +27,10 @@ import subprocess
 import sys
 
 URL_RE = re.compile(r"https?://(?:raw\.)?github(?:usercontent)?\.com/([\w.-]+)/([\w.-]+)")
+# blob/<ref>/<path> or raw/<ref>/<path> -- the half this gate used to skip.
+REF_RE = re.compile(
+    r"https?://(?:raw\.)?github(?:usercontent)?\.com/[\w.-]+/[\w.-]+/"
+    r"(?:blob|raw|tree)/([\w.-]+)/([^\s)>,`\"']*)")
 
 
 def repo_root():
@@ -44,6 +48,47 @@ def configured_remote(root):
         return None
     m = re.search(r"[:/]([\w.-]+)/([\w.-]+?)(?:\.git)?$", url)
     return (m.group(1), m.group(2)) if m else None
+
+
+def current_branch(root):
+    try:
+        return subprocess.run(["git", "-C", root, "branch", "--show-current"],
+                              capture_output=True, text=True, timeout=15).stdout.strip() or None
+    except Exception:
+        return None
+
+
+def check_refs(root, payload):
+    """Verify the BRANCH and the PATH in every blob/raw URL.
+
+    s01-d1fa77 -- the third time in one session that a gate reported clean over a
+    defect class it could not see, and the second time in THIS file. It matched
+    only <org>/<repo>. The repo's branch was `master` while all 19 payload URLs
+    said `blob/main/`: every one would have 404'd for a stranger, and the gate
+    was green. An authoritative-looking 404 is exactly the failure mode this
+    file's own docstring says it exists to prevent.
+
+    Two assertions:
+      1. the <ref> segment matches the branch that will actually be pushed
+      2. the <path> after it EXISTS in the repo -- a URL to a file we deleted
+         or renamed is the same invisible 404
+    """
+    branch = current_branch(root)
+    bad_ref, bad_path = [], []
+    for dirpath, _d, files in os.walk(payload):
+        for fn in files:
+            if not fn.endswith((".md", ".json", ".txt")):
+                continue
+            fp = os.path.join(dirpath, fn)
+            rel = os.path.relpath(fp, root)
+            for i, line in enumerate(open(fp, encoding="utf-8", errors="replace"), 1):
+                for ref, path in REF_RE.findall(line):
+                    if branch and ref != branch:
+                        bad_ref.append((rel, i, ref))
+                    p = path.rstrip("/.,)")
+                    if p and not os.path.exists(os.path.join(root, p)):
+                        bad_path.append((rel, i, p))
+    return branch, bad_ref, bad_path
 
 
 def main():
@@ -91,7 +136,25 @@ def main():
                 print("      ... and %d more" % (len(hits) - 5))
         return 1
 
-    print("OK — all %d payload URL(s) match remote %s/%s" % (total, remote[0], remote[1]))
+    branch, bad_ref, bad_path = check_refs(root, payload)
+    if bad_ref:
+        print("FAIL — %d URL(s) point at a ref that is not the current branch (%r):"
+              % (len(bad_ref), branch))
+        for f, ln, ref in bad_ref[:8]:
+            print("      %s:%d  ->  blob/%s/" % (f, ln, ref))
+        if len(bad_ref) > 8:
+            print("      ... and %d more" % (len(bad_ref) - 8))
+        print("\nThese resolve to an authoritative-looking 404 for every stranger.")
+        return 1
+    if bad_path:
+        print("FAIL — %d URL(s) point at a path that does not exist in this repo:"
+              % len(bad_path))
+        for f, ln, p in bad_path[:8]:
+            print("      %s:%d  ->  %s" % (f, ln, p))
+        return 1
+
+    print("OK — all %d payload URL(s) match remote %s/%s, ref %r, and every path exists"
+          % (total, remote[0], remote[1], branch))
     return 0
 
 
