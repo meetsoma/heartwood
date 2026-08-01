@@ -8,7 +8,7 @@ created: 2026-08-01
 updated: 2026-08-01
 ---
 <!-- SEAMS: (payload-relative — resolves inside soma/, works in any install)
-            ← ../../skills/heartwood/SKILL.md §4 (points here for the mechanical version)
+            ← ../../skills/cycles/SKILL.md §4 (points here for the mechanical version)
             (outside the payload — spec lives in the repo, NOT the install. URLs only, never relative.)
             ← https://github.com/meetsoma/heartwood/blob/main/spec/closing.md (the full reasoning this muscle mechanizes)
             ← https://github.com/meetsoma/heartwood/blob/main/spec/cycle-format.md (the spine sections this sequence fills) -->
@@ -72,7 +72,7 @@ the record actively misleads the next reader. If you're not sure the Goal was me
 
 ## Related
 
-- `../../skills/heartwood/SKILL.md` — the full pick/scaffold/fill/close playbook this muscle is one
+- `../../skills/cycles/SKILL.md` — the full pick/scaffold/fill/close playbook this muscle is one
   step of (payload-relative)
 - https://github.com/meetsoma/heartwood/blob/main/spec/closing.md — the full reasoning, the
   evidence-bar rule, and why `Bugs caught` matters as a corpus-level signal, not a per-cycle one

@@ -1,11 +1,14 @@
 ---
-name: heartwood
+name: cycles
 description: |
-  The work-record protocol — project/arc/cycle, four cycle variants, and what closing requires.
-  Use whenever starting new work that deserves a record (pick a variant, scaffold from a template),
-  or whenever marking existing work done, stopped, or replaced (close, park, or supersede a cycle).
-  Trigger words: cycle, arc, closing, closed, parked, superseded, heartwood, "what shipped",
-  "record this", "start a cycle".
+  Start, track and close work records — project / arc / cycle / phase, four cycle variants, and what
+  closing actually requires. Implements the heartwood protocol (heartwood is the protocol's name;
+  this skill is the thing you use).
+  Use whenever starting work that deserves a record (pick a shape, scaffold from a template), while
+  working (the record is where reasoning and decisions accumulate, not the context window), and when
+  marking work done, stopped, or replaced (close, park, or supersede).
+  Trigger words: cycle, arc, phase, closing, closed, parked, superseded, heartwood, "what shipped",
+  "record this", "start a cycle", "close this out".
 version: 1.0.0
 license: CC-BY-4.0
 origin: heartwood spec v0.1.0

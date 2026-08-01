@@ -38,7 +38,7 @@ denominator.
 Scaffold from `../templates/cycle/` or `../templates/variants/<variant>/` — **the templates install
 with this payload**, so it is a local copy, no network. An arc also takes `../templates/arc/` for its
 through-line file and `../templates/phase/` for each ordered part; closing an arc takes
-`../templates/closed/`. Exact commands and a pick-by-shape table: `../skills/heartwood/SKILL.md` §2.
+`../templates/closed/`. Exact commands and a pick-by-shape table: `../skills/cycles/SKILL.md` §2.
 
 ## The two rules that carry most of the value
 
