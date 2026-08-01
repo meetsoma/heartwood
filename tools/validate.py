@@ -27,7 +27,7 @@ import sys
 import yaml
 
 # spec/cycle-format.md §Status vocabulary — READ ONLY, the enum lives there.
-STATUSES = {"open", "active", "closed", "parked", "superseded"}
+STATUSES = {"open", "active", "closed", "shipped", "parked", "superseded"}
 # type: arc is required for an arc root (cycles-demo/example-arc/cycle.md).
 TYPES = {"cycle", "arc"}
 

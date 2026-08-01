@@ -108,7 +108,7 @@ unanswered spike leaves code in the tree that nobody owns.
 ---
 type: cycle
 variant: standard          # standard | branching | audit | spike
-status: open               # open | active | closed | parked | superseded
+status: open               # open | active | closed | shipped | parked | superseded
 title: "Short imperative phrase"    # QUOTE it — an unquoted colon breaks YAML
 created: 2026-08-01
 updated: 2026-08-01
@@ -144,15 +144,25 @@ status_note: "auto-flipped s01-17d700 — report.md confirms completion"
 A status of `shipped (auto-flipped s01-17d700 — report confirms)` is three fields in a trench coat,
 and it makes the corpus unfilterable.
 
-### Why `closed` and not `shipped`
+### Two terminal states: `closed` and `shipped`
 
-**`closed` describes the record. `shipped` would describe the work.** They are different claims, and
-heartwood specifies the record.
+**`closed` describes the record. `shipped` says it also reached the world.** Both are terminal and
+the closing agent chooses — `closed` is the default; `shipped` is for work that went live: a public
+repo, a deployed site, a published package. In practice `shipped` is most often the LAST cycle in an
+arc, because that is the one that ships the arc.
 
-Only one of the four variants actually ships. An `audit` produces findings and merges nothing. A
-`spike` is often discarded on purpose — that is a successful spike. A `branching` cycle converges on
-a decision. Labelling those `shipped` asserts a merge that never happened; `closed` is true for all
-four.
+**Why not one word.** Only one of the four variants actually ships. An `audit` produces findings and
+merges nothing. A `spike` is often discarded on purpose — that is a successful spike. A `branching`
+cycle converges on a decision. Forcing `shipped` onto those asserts a release that never happened.
+But forcing `closed` onto a production release throws away the one distinction a reader most wants:
+**did this reach anyone?**
+
+**Choosing:** if a stranger could see the result, it `shipped`. Otherwise it `closed`.
+
+<!-- CORRECTED s01-593a6d (Curtis). This section previously argued FOR a single terminal state and
+     against `shipped` entirely. That was right about audits and spikes and wrong about releases.
+     Measured cause: across 262 real cycles `shipped` appears 39 times and `closed` 7 — the corpus
+     had already made this distinction and the spec was erasing it. -->
 
 This is the same seam the rest of the spec runs on: heartwood specifies the ARTIFACT, a workflow
 protocol specifies the PROCESS.
@@ -169,8 +179,9 @@ tracking the work rather than the record. Hosts running both map:
 | `parked` | `parked` |
 | `superseded` | `superseded` |
 
-The two middle-and-outer values coincide; only the endpoints differ, and they differ because they
-describe different subjects. Neither is a fork of the other.
+With `shipped` adopted, heartwood is now a SUPERSET of PHASE's terminal vocabulary — `shipped` means
+the same thing in both, and `closed` adds the case PHASE has no word for (finished, never released).
+`open`↔`queued` remains the only true divergence. Neither is a fork of the other.
 
 ---
 

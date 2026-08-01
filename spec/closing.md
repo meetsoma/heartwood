@@ -89,6 +89,7 @@ say "I finished":
 | status | means | requires |
 |---|---|---|
 | **closed** | the Goal was met. Work is finished. | `What shipped` + `Decisions`, evidence bar met (§2) |
+| **shipped** | closed, AND it reached the world — public repo, live site, published package. Usually the last cycle in an arc. | everything `closed` requires, plus a pointer to the live thing (URL, tag, package) |
 | **parked** | deliberately stopped, not finished, may resume. | a one-line reason it stopped, in `Decisions` or a `status_note` |
 | **superseded** | replaced by different work; this cycle's Goal is no longer the plan. | a link to the cycle that replaced it |
 
@@ -112,6 +113,7 @@ just the three used at close time:
 
 ```yaml
 status: closed        # Goal met, What shipped + Decisions present, evidence bar met
+status: shipped        # closed AND live — name where (URL, tag, package). Default to `closed` if unsure.
 status: parked         # stopped, not finished, may resume — see Decisions for why
 status: superseded     # replaced — Decisions links the replacement
 ```
