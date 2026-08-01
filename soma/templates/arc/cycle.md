@@ -48,8 +48,13 @@ never by number** — a bare number identifies nothing once a second arc exists.
 *(Delete if none. `cycles/<arc>/<project>@ -> ../../<project>/.soma/cycles`)*
 
 > Moving a cycle out of its owning project breaks that project's record. A symlink lets an arc claim
-> membership without taking custody — but note that tools which follow symlinks will double-count it,
-> so any census over arcs must walk without following links.
+> membership without taking custody.
+>
+> ⚠ **Only symlink if your tooling cannot see across trees.** If your registry already discovers every
+> tree, a symlink buys nothing and costs two things: a census that double-counts (anything following
+> links counts the target twice), and a duplicated group in any dashboard. One estate measured a
+> **113-cycle (21%) inflation** from three of them and removed all three once its indexer was
+> tree-aware. Delete this section if you have no foreign members.
 
 ## State
 
