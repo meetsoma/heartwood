@@ -43,6 +43,35 @@ the closed half is evidence about what did.
 Only **Goal** and **Acceptance** are required to open a cycle. Only **What shipped** and
 **Decisions** are required to close one. Everything else earns its place.
 
+### Acceptance is a GATE, not a sentence
+
+`Acceptance` is the only section whose job is to be *run*. Measured across a 616-cycle corpus:
+**109 cycles carry an Acceptance and only 25 of those contain anything runnable** — so the section
+most responsible for falsifiability is prose four times out of five.
+
+A gate is a **command**, a **pass criterion**, and **today's measured value**:
+
+```
+| # | gate                  | command                        | pass  | now |
+|---|-----------------------|--------------------------------|-------|-----|
+| G1| no orphaned records   | `bin/check-orphans --count`    | 0     | 12  |
+| G2| import stays under 2s | `time bin/import fixtures/`    | <2.0s | 3.4s|
+```
+
+Recording `now` is what makes it a gate rather than a wish: drift becomes visible in both
+directions, and a gate that was green and went red is a signal instead of a surprise.
+
+**Then answer one question: what would make this gate a lie?** A gate with no answer cannot fail,
+and a check that cannot fail is decoration. The recurring answers are worth knowing:
+
+- it only ever sees valid input (needs a negative control)
+- it measures a stub or a file, not the executing path
+- it asserts *existence* where it should assert *operation*
+- its denominator was silently reduced, so a clean result means "not measured"
+
+A uniformly extreme result — everything passing, everything failing — is a broken-probe signature,
+not a finding.
+
 ### Why `Bugs caught` matters more than it looks
 
 It is the section nobody designs and everybody ends up writing. A cycle with shipped work and an

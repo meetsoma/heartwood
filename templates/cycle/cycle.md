@@ -16,13 +16,23 @@ tags: []                   # lowercase filters
 
 <One sentence. What is TRUE when this is done? Not what you will do — what will be true.>
 
-## Acceptance
+## Acceptance — gates
 
-<The falsifiable form of Goal. How does anyone else check it?
- If you cannot write a command or an observation here, the Goal is not yet a goal.>
+<The falsifiable form of Goal. If you cannot write a command here, the Goal is not a goal yet.
 
-- [ ]
-- [ ]
+ Prefer the table: a gate is a COMMAND with a pass criterion and today's measured value, so
+ drift is visible in both directions. Prose acceptance cannot be run, and an acceptance
+ nobody can run is a wish.>
+
+| # | gate | command | pass | now |
+|---|---|---|---|---|
+| G1 |  |  |  |  |
+| G2 |  |  |  |  |
+
+<Then answer, in one line: WHAT WOULD MAKE THESE GATES A LIE?
+ A gate with no answer is decoration — it cannot fail, so its green means nothing.
+ Common answers: it only sees valid input · it measures a stub, not the real path ·
+ it asserts existence rather than operation · its denominator is silently reduced.>
 
 ## Spec
 
