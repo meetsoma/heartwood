@@ -137,7 +137,7 @@ unanswered spike leaves code in the tree that nobody owns.
 ---
 type: cycle
 variant: standard          # standard | branching | audit | spike
-status: open               # open | active | closed | shipped | parked | superseded
+status: open               # open | seeded | active | closed | shipped | parked | superseded
 title: "Short imperative phrase"    # QUOTE it — an unquoted colon breaks YAML
 created: 2026-08-01
 updated: 2026-08-01
