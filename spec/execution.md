@@ -49,6 +49,15 @@ Every key is optional. `role` alone is a useful cycle.
 - **`delegate`** — a parent dispatches this as one unit of work and verifies the result. The common case.
 - **`phased`** — this cycle is one step in a chain; `next:` routes to the following step. Use when
   the work genuinely has stages that hand off, not merely sub-tasks.
+
+  🔑 **Each stage's brief must PRE-AUTHORIZE refuting its input** ("if the premise is wrong, STOP
+  and report — that is a valid outcome"). Measured on a 4-stage chain (L55 persistence,
+  s01-7d05d5, 2026-08-05): S2 revoked S1's binding directive, S3 revoked S2's mechanism, S4 shipped
+  what survived — **every stage's most valuable output was refuting part of its input**, and the
+  chain only worked because each gate treated the refutation as success, not failure. A phased
+  chain whose stages may only ADD is a machine for hardening the first stage's mistakes: an
+  adjudicated PASS at stage N converts stage N-1's wrong sentence into a binding instruction unless
+  stage N+1 is licensed to challenge it.
 - **`manual`** — declared for documentation, deliberately not automated. Says *"a person does this,
   on purpose"*, which is different from an absent block meaning *"nobody decided."*
 
